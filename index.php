@@ -9,7 +9,7 @@ require __DIR__ . '/vendor/autoload.php';
 header('Content-Type: application/json');
 
 $app = AppFactory::create();
-$app->setBasePath('https://tp-php-progiii.herokuapp.com/');
+// $app->setBasePath('https://tp-php-progiii.herokuapp.com/');
 
 $app->addErrorMiddleware(true, false, false);
 
