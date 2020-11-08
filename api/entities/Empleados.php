@@ -6,6 +6,8 @@ use DB\DAOEmpleados;
 use Exception;
 use stdClass;
 
+define('DBNAMEEMP', "heroku_5c10d497ff4fe74");
+
 class Empleado
 {
 
@@ -29,7 +31,7 @@ class Empleado
 
     static function AltaEmpleadoDB($empleado)
     {
-        $db = new DAOEmpleados('heroku_5c10d497ff4fe74');
+        $db = new DAOEmpleados(DBNAMEEMP);
         if (!$db->existsEmployeeDB($empleado->dni)) {
             $db->saveEmpleadoDB($empleado);
         } else
@@ -38,19 +40,19 @@ class Empleado
 
     static function getAllEmployees()
     {
-        $db = new DAOEmpleados('heroku_5c10d497ff4fe74');
+        $db = new DAOEmpleados(DBNAMEEMP);
         return $db->getAllEmployeesDB();
     }
 
     static function getEmployees()
     {
-        $db = new DAOEmpleados('heroku_5c10d497ff4fe74');
+        $db = new DAOEmpleados('');
         return $db->getEmployeesDB();
     }
 
     static function getEmployeeByDni($dni)
     {
-        $db = new DAOEmpleados('heroku_5c10d497ff4fe74');
+        $db = new DAOEmpleados(DBNAMEEMP);
         $res = $db->getEmployeeByDniDB($dni);
         if(!$res)
             throw new Exception('No se Encontro al Empleado');
@@ -59,13 +61,21 @@ class Empleado
     }
 
     static function deleteEmployeeByDni($dni){
-        $db = new DAOEmpleados('heroku_5c10d497ff4fe74');
+        $db = new DAOEmpleados(DBNAMEEMP);
         return $db->dropEmployeeDB($dni);
     }
 
     static function updateEmployee($empleado){
-        $db = new DAOEmpleados('heroku_5c10d497ff4fe74');
+        $db = new DAOEmpleados(DBNAMEEMP);
          if(!$db->updateEmployeeDB($empleado))
          throw new Exception('No se ha logrado Updatear al Empleado');
+    }
+
+    static function GetIdEmpleadoRandom(){
+        $db = new DAOEmpleados(DBNAMEEMP);
+        $listID = $db->getIdEmpleados();
+        // var_dump($listID);
+        $keyRand = array_rand($listID);
+        return $listID[$keyRand]->idEmpleado;
     }
 }

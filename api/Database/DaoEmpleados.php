@@ -121,4 +121,12 @@ class DAOEmpleados
             return $query->execute();
         }
     }
+
+    public function getIdEmpleados(){
+        if($this->connectDatabase()){
+            $query = $this->_dao->prepare("SELECT idEmpleado FROM $this->_dbPlusTable");
+            $query->execute();
+            return $query->fetchALL(PDO::FETCH_OBJ);
+        }
+    }
 }

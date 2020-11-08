@@ -1,12 +1,15 @@
 <?php
 
 include './api/Entities/Empleados.php';
+include './api/Entities/Pedidos.php';
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Slim\Routing\RouteCollectorProxy;
 use \Entities\Empleado;
+use \Entities\Pedido;
+
 
 
 require __DIR__ . '/vendor/autoload.php';
@@ -132,6 +135,26 @@ $app->group('/empleados', function (RouteCollectorProxy $group) {
             $response->message = $th->getMessage();
             $res->getBody()->write(json_encode($response));
         }
+        return $res;
+    });
+});
+
+$app->group('/pedidos', function (RouteCollectorProxy $group) {
+
+    $group->get('/', function (Request $req, Response $res, $args) {
+
+        $response = Pedido::obtenerPedidos();
+        $res->getBody()->write(json_encode($response));
+        return $res;
+    });
+
+    $group->post('/', function (Request $req, Response $res, $args) {
+
+        $bod = $req->getParsedBody();
+        $randID = Empleado::GetIdEmpleadoRandom();
+        $pedido = new Pedido($bod['orden'], $randID ,$bod['id_mesa'], Pedido::GenerateCode(), );
+        // $pedido->ordenarPedido();
+        $res->getBody()->write(json_encode($pedido->_pedidoInfo));
         return $res;
     });
 });
