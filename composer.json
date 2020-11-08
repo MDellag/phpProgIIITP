@@ -1,14 +1,21 @@
 {   
-    "name": "mdellag/comanda",
-    "description": "Trabajo practico Programacion III Backend",
-    "authors": [
-      {
-        "name": "mdellag",
-        "email": "mauro.hfd@gmail.com"
-      }
-    ],
-    "require": {
-        "slim/slim": "^4.5",
-        "slim/psr7": "^1.2"
+  "name": "mdellag/comanda",
+  "description": "Trabajo practico Programacion III Backend",
+  "authors": [
+    {
+      "name": "mdellag",
+      "email": "mauro.hfd@gmail.com"
     }
+  ],
+  "require": {
+      "slim/slim": "^4.5",
+      "slim/psr7": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "DB\\": "api/Database",
+      "Entities\\": "api/entities",
+      "Users\\": "Users"
+    }
+  }
 }
