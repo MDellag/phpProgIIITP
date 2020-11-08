@@ -18,7 +18,7 @@ class DAOEmpleados
         $this->_dbName = $dbname;
         $this->_user = $user;
         $this->_password = $password;
-        $this->_connectionString = 'mysql:host=heroku_5c10d497ff4fe74; dbname=' . $this->_dbName;
+        $this->_connectionString = 'mysql:host=us-cdbr-east-02.cleardb.com; dbname=' . $this->_dbName;
     }
 
 
