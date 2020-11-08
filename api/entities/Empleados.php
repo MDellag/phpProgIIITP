@@ -60,7 +60,7 @@ class Empleado
 
     static function deleteEmployeeByDni($dni){
         $db = new DAOEmpleados('heroku_5c10d497ff4fe74');
-        return $db->deleteEmployeeDB($dni);
+        return $db->dropEmployeeDB($dni);
     }
 
     static function updateEmployee($empleado){
