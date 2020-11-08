@@ -13,7 +13,7 @@ class DAOEmpleados
     private $_password;
     private $_dao;
 
-    public function __construct($dbname, $user = 'root', $password = '')
+    public function __construct($dbname, $user = 'b6a01266d7dd99', $password = '0fac4371')
     {
         $this->_dbName = $dbname;
         $this->_user = $user;
