@@ -37,7 +37,7 @@ class DAOEmpleados
     {
         if ($this->connectDatabase()) {
             $date = date('Y-m-d');
-            $query = $this->_dao->prepare("INSERT INTO comanda.empleados (name, lastname, dni, creationDate) VALUE (:name, :lastname, :dni, :creationDate)");
+            $query = $this->_dao->prepare("INSERT INTO heroku_5c10d497ff4fe74.empleados (name, lastname, dni, creationDate) VALUE (:name, :lastname, :dni, :creationDate)");
             $query->bindParam(':name', $empleado->name);
             $query->bindParam(':lastname', $empleado->lastname);
             $query->bindParam(':dni', $empleado->dni);
@@ -50,7 +50,7 @@ class DAOEmpleados
     public function getAllEmployeesDB()
     {
         if ($this->connectDatabase()) {
-            $query = $this->_dao->prepare("SELECT * FROM comanda.empleados");
+            $query = $this->_dao->prepare("SELECT * FROM heroku_5c10d497ff4fe74.empleados");
             $query->execute();
             return $query->fetchAll(PDO::FETCH_OBJ);
         }
@@ -59,7 +59,7 @@ class DAOEmpleados
     public function getEmployeesDB()
     {
         if ($this->connectDatabase()) {
-            $query = $this->_dao->prepare("SELECT * FROM comanda.empleados WHERE dropDate IS NULL");
+            $query = $this->_dao->prepare("SELECT * FROM heroku_5c10d497ff4fe74.empleados WHERE dropDate IS NULL");
             $query->execute();
             return $query->fetchAll(PDO::FETCH_OBJ);
         }
@@ -68,7 +68,7 @@ class DAOEmpleados
     public function getEmployeeByDniDB($dni)
     {
         if ($this->connectDatabase()) {
-            $query = $this->_dao->prepare("SELECT * FROM comanda.empleados where dni = :dni");
+            $query = $this->_dao->prepare("SELECT * FROM heroku_5c10d497ff4fe74.empleados where dni = :dni");
             $query->bindParam(':dni', $dni);
             $query->execute();
             return $query->fetch(PDO::FETCH_OBJ);
@@ -91,7 +91,7 @@ class DAOEmpleados
     public function updateEmployeeDB($empleado)
     {
         if ($this->connectDatabase()) {
-            $query = $this->_dao->prepare("UPDATE comanda.empleados set name = :name, lastname = :lastname where dni = :dni");
+            $query = $this->_dao->prepare("UPDATE heroku_5c10d497ff4fe74.empleados set name = :name, lastname = :lastname where dni = :dni");
             $query->bindParam(':name', $empleado->name);
             $query->bindParam(':lastname', $empleado->lastname);
             $query->bindParam(':dni', $empleado->dni);
@@ -103,7 +103,7 @@ class DAOEmpleados
     public function deleteEmployeeDB($dni)
     {
         if ($this->connectDatabase()) {
-            $query = $this->_dao->prepare("DELETE FROM comanda.empleados where dni = :dni");
+            $query = $this->_dao->prepare("DELETE FROM heroku_5c10d497ff4fe74.empleados where dni = :dni");
             $query->bindParam(':dni', $dni);
             return $query->execute();
         }
@@ -113,7 +113,7 @@ class DAOEmpleados
     {
         if ($this->connectDatabase()) {
             $date = date('Y-m-d');
-            $query = $this->_dao->prepare("UPDATE comanda.empleados set dropDate = :dropDate  where dni = :dni");
+            $query = $this->_dao->prepare("UPDATE heroku_5c10d497ff4fe74.empleados set dropDate = :dropDate  where dni = :dni");
             $query->bindParam(':dropDate', $date);
             $query->bindParam(':dni', $dni);
             return $query->execute();

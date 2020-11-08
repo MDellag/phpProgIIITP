@@ -29,6 +29,14 @@ class ComposerStaticInitf564f47974cd8c9317745266f772c0fb
             'Fig\\Http\\Message\\' => 17,
             'FastRoute\\' => 10,
         ),
+        'E' => 
+        array (
+            'Entities\\' => 9,
+        ),
+        'D' => 
+        array (
+            'DB\\' => 3,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -51,8 +59,8 @@ class ComposerStaticInitf564f47974cd8c9317745266f772c0fb
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Container\\' => 
         array (
@@ -65,6 +73,14 @@ class ComposerStaticInitf564f47974cd8c9317745266f772c0fb
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'Entities\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/api/entities',
+        ),
+        'DB\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/api/Database',
         ),
     );
 

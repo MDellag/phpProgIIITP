@@ -2,7 +2,6 @@
 
 namespace Entities;
 
-use DB\DAO;
 use DB\DAOEmpleados;
 use Exception;
 use stdClass;

@@ -14,8 +14,7 @@
   "autoload": {
     "psr-4": {
       "DB\\": "api/Database",
-      "Entities\\": "api/entities",
-      "Users\\": "Users"
+      "Entities\\": "api/entities"
     }
   }
 }
