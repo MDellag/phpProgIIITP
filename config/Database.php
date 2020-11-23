@@ -13,7 +13,7 @@ class Database {
 
         $capsule->addConnection([
             'driver' => 'mysql',
-            'host' => 'host=us-cdbr-east-02.cleardb.com',
+            'host' => 'us-cdbr-east-02.cleardb.com',
             'database' => 'heroku_5c10d497ff4fe74',
             'username' => 'b6a01266d7dd99',
             'password' => '0fac4371',
