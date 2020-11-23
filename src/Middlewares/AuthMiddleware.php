@@ -5,9 +5,7 @@ namespace App\Middlewares;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Psr7\Response;
-use App\Controllers\UserController;
 use \Firebase\JWT\JWT;
-use App\Models\User;
 use stdClass;
 
 // use Psr\Http\Message\ResponseInterface as Response;
