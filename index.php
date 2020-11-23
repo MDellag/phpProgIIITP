@@ -1,15 +1,16 @@
 <?php
 
-include './api/Entities/Empleados.php';
-include './api/Entities/Pedidos.php';
-
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+// use Psr\Http\Message\ResponseInterface as Response;
+// use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Slim\Routing\RouteCollectorProxy;
-use \Entities\Empleado;
-use \Entities\Pedido;
-
+use App\Middlewares\JsonMiddleware;
+use App\Middlewares\AuthMiddleware;
+use \App\Controllers\EmpleadoController;
+use App\Controllers\MesaController;
+use \App\Controllers\PedidoController;
+use \App\Controllers\UserController;
+use Config\Database;
 
 
 require __DIR__ . '/vendor/autoload.php';
@@ -17,147 +18,81 @@ require __DIR__ . '/vendor/autoload.php';
 header('Content-Type: application/json');
 date_default_timezone_set("America/Argentina/Buenos_Aires");
 
-
+$conn = new Database;
 $app = AppFactory::create();
-// $app->setBasePath('/php/LaComanda');
+
 
 $app->addErrorMiddleware(true, false, false);
 $app->addBodyParsingMiddleware(); //Este se encarga de parsear los Json del Body Request. Si no, no podriamos enviar Json.
 
 
-$app->get('/', function (Request $request, Response $response, $args) {
-
-    $json = new stdClass();
-    $json->status = 200;
-    $json->method = 'GET';
-    $json = json_encode($json);
-    $response->getBody()->write($json);
-    return $response;
-});
-
 
 $app->group('/users', function (RouteCollectorProxy $group) {
-    $group->get('/{id}[/]', function (Request $req, Response $res, $args) {
+    $group->post('/register[/]', UserController::class . ":register");
+    
+    $group->post('/login[/]', UserController::class . ":login");
 
-        $bod = json_encode($args);
-        $res->getBody()->write($bod);
-        return $res;
-    });
-
-    $group->get('/', function (Request $req, Response $res, $args) {
-    });
-});
+})->add(new JsonMiddleware);
 
 
 $app->group('/empleados', function (RouteCollectorProxy $group) {
-    $group->get('/', function (Request $req, Response $res, $args) {
+    $group->get('[/]', EmpleadoController::class . ":getActiveEmployees");
+    
+    $group->get('/all[/]', EmpleadoController::class . ":getAll");
 
-        $bod = Empleado::getEmployees();
-        $res->getBody()->write(json_encode($bod));
-        return $res;
-    });
+    $group->get('/ingreso[/]', EmpleadoController::class . ":ingresoSistema");
 
-    $group->get('/{dni}[/]', function (Request $req, Response $res, $args) {
+    $group->get('/ingresoDate[/]', EmpleadoController::class . ":ingresoSistemaByDate");
 
-        try {
-            $bod = Empleado::getEmployeeByDni($args['dni']);
-            $res->getBody()->write(json_encode($bod));
-        } catch (\Exception $th) {
-            $msj = new stdClass();
-            $msj->date = date('Y-m-d  H:m');
-            $msj->message = $th->getMessage();
-            $res->getBody()->write(json_encode($msj));
-        }
-        return $res;
-    });
+    $group->get('/ingresoDates[/]', EmpleadoController::class . ":ingresoSistemaBetweenDate");
 
-    $group->post('/', function (Request $req, Response $res, $args) {
+    $group->get('/{dni}', EmpleadoController::class . ":getOneEmployee");
 
-        $body = $req->getParsedBody();
+    $group->get('/operaciones/{idSector}[/]', EmpleadoController::class . ":operacionesBySector"); //modificar para fecha
 
-        $response = new stdClass();
-        $response->date = date("Y/m/d  H:m");
+    $group->get('/operaciones/{idSector}/empleados/{idEmpl}[/]', EmpleadoController::class . ":operacionesBySectorAndEmployee"); //modificar para fecha
 
-        try {
-            if (strlen((string)$body['dni']) != 8) throw new Exception('El Dni es mayor o menor a 8 digitos');
-            $employee = new Empleado($body['name'], $body['lastname'], $body['dni']);
-            Empleado::AltaEmpleadoDB($employee->_personalInfo);
+    $group->get('/operaciones/empleados/{idEmpl}[/]', EmpleadoController::class . ":operacionesByEmployee"); //modificar para fecha
+    
+    $group->post('[/]', EmpleadoController::class . ":addEmployee");
 
-            $response->employee = $employee->_personalInfo;
-            $res->getBody()->write(json_encode($response));
-        } catch (\exception  $th) {
-            $response->status = 'server internal Error';
-            $response->message = $th->getMessage();
-            $res->getBody()->write(json_encode($response));
-        }
-        return $res;
-    });
+    $group->put('/{dni}', EmpleadoController::class . ":updateEmployee");
 
-    $group->put('/{dni}[/]', function (Request $req, Response $res, $args) {
+    $group->delete('/{dni}', EmpleadoController::class . ":dropEmployee");
 
-        $body = $req->getParsedBody();
+})->add(new AuthMiddleware('admin'))->add(new JsonMiddleware);
 
-        $response = new stdClass();
-        $response->date = date("Y/m/d  H:m");
-
-        try {
-            if (strlen((string)$args['dni']) != 8) throw new Exception('El Dni es mayor o menor a 8 digitos');
-
-            $employee = new stdClass();
-            $employee->name = $body['name'];
-            $employee->lastname = $body['lastname'];
-            $employee->dni = $args['dni'];
-
-            Empleado::updateEmployee($employee);
-
-            $response->employee = $employee;
-            $res->getBody()->write(json_encode($response));
-        } catch (\exception  $th) {
-            $response->status = 'server internal Error';
-            $response->message = $th->getMessage();
-            $res->getBody()->write(json_encode($response));
-        }
-        return $res;
-    });
-
-    $group->delete('/{dni}[/]', function (Request $req, Response $res, $args) {
-
-        $response = new stdClass();
-        $response->date = date("Y/m/d  H:m");
-
-        try {
-            Empleado::deleteEmployeeByDni($args['dni']);
-
-            $response->message = "Empleado Dado de baja con dni: " . $args['dni'];
-            $res->getBody()->write(json_encode($response));
-        } catch (\exception  $th) {
-            $response->status = 'server internal Error';
-            $response->message = $th->getMessage();
-            $res->getBody()->write(json_encode($response));
-        }
-        return $res;
-    });
-});
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
+    $group->get('/masvendido[/]', PedidoController::class . ":productoMasVendido"); //modificar para fecha
 
-    $group->get('/', function (Request $req, Response $res, $args) {
+    $group->get('/menosvendido[/]', PedidoController::class . ":productoMenosVendido"); //modificar para fecha
+    
+    $group->get('/status/{status}[/]', PedidoController::class . ":getProductsByStatus"); //modificar para fecha
 
-        $response = Pedido::obtenerPedidos();
-        $res->getBody()->write(json_encode($response));
-        return $res;
-    });
+    $group->get('/all[/]', PedidoController::class . ":getAllPedidos");
 
-    $group->post('/', function (Request $req, Response $res, $args) {
+    $group->get('/{code}', PedidoController::class . ":getPedidoByCode");
 
-        $bod = $req->getParsedBody();
-        $randID = Empleado::GetIdEmpleadoRandom();
-        $pedido = new Pedido($bod['orden'], $randID ,$bod['id_mesa'], Pedido::GenerateCode(), );
-        // $pedido->ordenarPedido();
-        $res->getBody()->write(json_encode($pedido->_pedidoInfo));
-        return $res;
-    });
-});
+    $group->post('[/]', PedidoController::class . ":addPedido");
 
+    $group->put('/{code}', PedidoController::class . ":updatePedido");
+
+    $group->delete('/cancelar/{code}', PedidoController::class . ":updateCancelarPedido");
+    
+})->add(new AuthMiddleware("admin"))->add(new JsonMiddleware);
+
+
+$app->group('/mesas', function (RouteCollectorProxy $group) {
+    $group->get('/usoMesas[/]', MesaController::class . ":getUsoDeMesas"); 
+
+    $group->get('/facturacion[/]', MesaController::class . ":getFacturacionMesas"); 
+
+    $group->get('/facturacion/total[/]', MesaController::class . ":getFacturacionTotalMesas"); 
+
+    $group->get('/facturacion/total/fechas/{dateStart}/{dateEnd}[/]', MesaController::class . ":getFacturacionMesaByIdAndDate"); 
+
+    
+})->add(new AuthMiddleware("admin"))->add(new JsonMiddleware);
 
 $app->run();

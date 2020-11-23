@@ -4,12 +4,13 @@
 
 $issues = array();
 
-if (!(PHP_VERSION_ID >= 70200)) {
-    $issues[] = 'Your Composer dependencies require a PHP version ">= 7.2.0". You are running ' . PHP_VERSION  .  '.';
+if (!(PHP_VERSION_ID >= 70300)) {
+    $issues[] = 'Your Composer dependencies require a PHP version ">= 7.3.0". You are running ' . PHP_VERSION  .  '.';
 }
 
 $missingExtensions = array();
 extension_loaded('json') || $missingExtensions[] = 'json';
+extension_loaded('mbstring') || $missingExtensions[] = 'mbstring';
 
 if ($missingExtensions) {
     $issues[] = 'Your Composer dependencies require the following PHP extensions to be installed: ' . implode(', ', $missingExtensions);

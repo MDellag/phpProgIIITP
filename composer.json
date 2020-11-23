@@ -1,4 +1,4 @@
-{   
+{
   "name": "mdellag/comanda",
   "description": "Trabajo practico Programacion III Backend",
   "authors": [
@@ -8,13 +8,16 @@
     }
   ],
   "require": {
-      "slim/slim": "^4.5",
-      "slim/psr7": "^1.2"
+    "slim/slim": "^4.5",
+    "slim/psr7": "^1.2",
+    "illuminate/database": "^8.13",
+    "illuminate/events": "^8.13",
+    "firebase/php-jwt": "^5.2"
   },
   "autoload": {
     "psr-4": {
-      "DB\\": "api/Database",
-      "Entities\\": "api/entities"
+      "Config\\": "config/",
+      "App\\": "src/"
     }
   }
 }
