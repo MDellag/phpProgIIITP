@@ -34,7 +34,7 @@ class AuthMiddleware
         $token = $headers['token'];
 
         $jwt = JWT::decode($token, KEY2, array('HS256'));
-
+        echo json_encode($jwt);
         $resp = new stdClass;
         $resp->date = date('Y-m-d');
 
