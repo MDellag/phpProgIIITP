@@ -60,7 +60,7 @@ $app->group('/empleados', function (RouteCollectorProxy $group) {
 
     $group->delete('/{dni}', EmpleadoController::class . ":dropEmployee");
 
-})->add(new AuthMiddleware('admin'))->add(new JsonMiddleware);
+})->add(new JsonMiddleware);
 
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
