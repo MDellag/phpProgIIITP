@@ -33,7 +33,8 @@ class UserController
         $resp = new stdClass;
         $resp->date = date('Y-m-d  H:m:s');
         try {
-            if($req['type_user'] != 1 || $req['type_user'] != 2) throw new Exception('Tipo de usuario invalido');
+
+            if($req['type_user'] != 1 && $req['type_user'] != 2) throw new Exception('Tipo de usuario invalido');
 
             $user->username = $req['username'];
             $user->password = $pass;
