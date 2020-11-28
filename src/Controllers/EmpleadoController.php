@@ -91,9 +91,11 @@ class EmpleadoController
 
             $empl->name = $req['name'];
             $empl->lastname = $req['lastname'];
+            $empl->id_puesto = $req['id_puesto'];
+            $empl->dropDate = null;
             $empl->save();
 
-
+            
             $resp->status = 200;
             $resp->data = $empl;
         } catch (\Throwable $th) {
@@ -144,12 +146,11 @@ class EmpleadoController
     public function ingresoSistemaByDate(Request $request, Response $response, $args)
     {
         $regis = RegistroEmpleados::get();
-        $req = $request->getParsedBody();
         $coincidencias = array();
 
         foreach ($regis as $reg) {
 
-            if ($reg->date == $req['date'])
+            if ($reg->date == $args['date'])
                 array_push($coincidencias, $reg);
         }
 
@@ -164,12 +165,11 @@ class EmpleadoController
     public function ingresoSistemaBetweenDate(Request $request, Response $response, $args)
     {
         $regis = RegistroEmpleados::get();
-        $req = $request->getParsedBody();
         $coincidencias = array();
 
         foreach ($regis as $reg) {
 
-            if ($reg->date >= $req['dateStart'] && $reg->date <= $req['dateEnd'])
+            if ($reg->date >= $args['date1'] && $reg->date <= $args['date2'])
                 array_push($coincidencias, $reg);
         }
 

@@ -7,6 +7,7 @@ use Slim\Routing\RouteCollectorProxy;
 use App\Middlewares\JsonMiddleware;
 use App\Middlewares\AuthMiddleware;
 use \App\Controllers\EmpleadoController;
+use App\Controllers\MenuController;
 use App\Controllers\MesaController;
 use \App\Controllers\PedidoController;
 use \App\Controllers\UserController;
@@ -42,17 +43,17 @@ $app->group('/empleados', function (RouteCollectorProxy $group) {
 
     $group->get('/ingreso[/]', EmpleadoController::class . ":ingresoSistema");
 
-    $group->get('/ingresoDate[/]', EmpleadoController::class . ":ingresoSistemaByDate");
+    $group->get('/ingresoDate/{date}[/]', EmpleadoController::class . ":ingresoSistemaByDate");
 
-    $group->get('/ingresoDates[/]', EmpleadoController::class . ":ingresoSistemaBetweenDate");
+    $group->get('/ingresoDates/{date1}/{date2}', EmpleadoController::class . ":ingresoSistemaBetweenDate");
 
     $group->get('/{dni}', EmpleadoController::class . ":getOneEmployee");
 
     $group->get('/operaciones/{idSector}[/]', EmpleadoController::class . ":operacionesBySector"); 
 
-    $group->get('/operaciones/{idSector}/empleados/{idEmpl}[/]', EmpleadoController::class . ":operacionesBySectorAndEmployee"); 
+    $group->get('/{idEmpl}/operaciones/{idSector}[/]', EmpleadoController::class . ":operacionesBySectorAndEmployee"); 
 
-    $group->get('/operaciones/empleados/{idEmpl}[/]', EmpleadoController::class . ":operacionesByEmployee"); 
+    $group->get('/{idEmpl}/operaciones[/]', EmpleadoController::class . ":operacionesByEmployee"); 
     
     $group->post('[/]', EmpleadoController::class . ":addEmployee");
 
@@ -94,5 +95,8 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
 
     
 })->add(new JsonMiddleware)->add(new AuthMiddleware("admin")); 
+
+
+$app->get('/menu[/]', MenuController::class . ":getMenu");
 
 $app->run();

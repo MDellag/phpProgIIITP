@@ -1,0 +1,832 @@
+{
+	"info": {
+		"_postman_id": "e48da600-dffa-4c14-9aed-4b958a50ae11",
+		"name": "SLIM COMANDA DEPLOYED",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Slim Deployed New Version",
+			"item": [
+				{
+					"name": "Empleados",
+					"item": [
+						{
+							"name": "Alta Empleado",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Pepin\",\r\n    \"lastname\": \"test\",\r\n    \"dni\": 11115553,\r\n    \"id_puesto\": 3\r\n}"
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Empleado by DNI",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados/62395323",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados",
+										"62395323"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Empleados",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{UrlLeft}}LaComanda/empleados/all",
+									"host": [
+										"{{UrlLeft}}LaComanda"
+									],
+									"path": [
+										"empleados",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Drop Empleado",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados/62395323",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados",
+										"62395323"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Empleado",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"William.H\",\r\n    \"lastname\": \"Doe\",\r\n    \"id_puesto\": 3\r\n}"
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados/6239532",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados",
+										"6239532"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Registro Empleados",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados/ingreso",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados",
+										"ingreso"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Registro Por Fecha",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"date\" : \"2020-11-28\"\r\n}"
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados/ingresoDate",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados",
+										"ingresoDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Registro Entre Fechas",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dateStart\" : \"2020-11-09\",\r\n    \"dateEnd\" : \"2020-11-29\"\r\n}"
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados/ingresoDates",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados",
+										"ingresoDates"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Operaciones By Sector",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados/operaciones/4",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados",
+										"operaciones",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Operaciones by id y Empleado",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados/23/operaciones/4/",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados",
+										"23",
+										"operaciones",
+										"4",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Operaciones by Empleado",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/empleados/23/operaciones/",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"empleados",
+										"23",
+										"operaciones",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Pedidos",
+					"item": [
+						{
+							"name": "Get Pedidos",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/pedidos/all",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pedidos",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Pedido",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"tarde\"  \r\n}"
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/pedidos/Q269Y",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pedidos",
+										"Q269Y"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pedido by Code",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/pedidos/Q269Y",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pedidos",
+										"Q269Y"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Mas Vendido",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/pedidos/masvendido",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pedidos",
+										"masvendido"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Menos Vendido",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/pedidos/menosvendido",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pedidos",
+										"menosvendido"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetPedidos By Status",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/pedidos/status/tarde",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pedidos",
+										"status",
+										"tarde"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alta Pedido",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orden\": [3, 5, 21, 10],\r\n    \"id_mesa\": 9\r\n}"
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/pedidos/",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pedidos",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Registrar User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"user003\",\r\n    \"password\": \"1234\",\r\n    \"mail\": \"user003@comanda\",\r\n    \"type_user\": 2\r\n}"
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/users/register",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1df7ae8c-e6a6-40f5-84ed-0fa4075305d7",
+										"exec": [
+											"var token = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"access_tok\", token.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"1234\"\r\n}"
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/users/login",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Mesas",
+					"item": [
+						{
+							"name": "Get Uso de Mesas",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/mesas/usoMesas?date=2020-11-28",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"mesas",
+										"usoMesas"
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "2020-11-28"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Mesa Mas Facturada",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/mesas/facturacion?dateStart=2020-11-19&dateEnd=2020-11-28",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"mesas",
+										"facturacion"
+									],
+									"query": [
+										{
+											"key": "dateStart",
+											"value": "2020-11-19"
+										},
+										{
+											"key": "dateEnd",
+											"value": "2020-11-28"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Mesa Facturacion Total",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/mesas/facturacion/total",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"mesas",
+										"facturacion",
+										"total"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Mesa Facturacion Entre Fechas",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"type": "text",
+										"value": "{{access_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://tp-php-progiii.herokuapp.com/mesas/facturacion/total/fechas/2020-11-12/2020-11-28",
+									"protocol": "https",
+									"host": [
+										"tp-php-progiii",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"mesas",
+										"facturacion",
+										"total",
+										"fechas",
+										"2020-11-12",
+										"2020-11-28"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
