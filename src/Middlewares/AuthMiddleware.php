@@ -33,7 +33,7 @@ class AuthMiddleware
 
         $headers = getallheaders();
        
-        $token = $request->headers->get('Token');
+        $token = $headers('Token');
 
         $res = new stdClass;
         $res->date = date('Y-m-d');
