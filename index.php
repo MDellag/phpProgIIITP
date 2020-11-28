@@ -80,7 +80,7 @@ $app->group('/pedidos', function (RouteCollectorProxy $group) {
 
     $group->delete('/cancelar/{code}', PedidoController::class . ":updateCancelarPedido");
     
-})->add(new AuthMiddleware("admin"))->add(new JsonMiddleware);
+})->add(new JsonMiddleware); //add(new AuthMiddleware("admin"))->
 
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {
@@ -93,6 +93,6 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
     $group->get('/facturacion/total/fechas/{dateStart}/{dateEnd}[/]', MesaController::class . ":getFacturacionMesaByIdAndDate"); 
 
     
-})->add(new AuthMiddleware("admin"))->add(new JsonMiddleware);
+})->add(new JsonMiddleware); //add(new AuthMiddleware("admin"))->
 
 $app->run();
