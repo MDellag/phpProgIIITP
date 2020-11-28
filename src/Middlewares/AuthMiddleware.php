@@ -35,9 +35,9 @@ class AuthMiddleware
 
         
         
-        $resp = new stdClass;
-        $resp->date = date('Y-m-d');
-
+        $res = new stdClass;
+        $res->date = date('Y-m-d');
+        $resp = new Response();
         try {
             $jwt = JWT::decode($token, KEY2);
 
@@ -45,18 +45,17 @@ class AuthMiddleware
 
                 $response = $handler->handle($request);
                 $existingContent = (string) $response->getBody();
-                $resp = new Response();
+                
                 $resp->getBody()->write($existingContent);
                 return $resp;
             } else {
-                $response = new Response();
-                $resp->message = "Tipo de Usuario de Usuario Invalido";
-                $response->getBody()->write(json_encode($resp));
+                $res->message = "Tipo de Usuario de Usuario Invalido";
+                $resp->getBody()->write(json_encode($res));
             }
         } catch (\Throwable $th) {
-            $resp->message = $th->getMessage();
-            $response->getBody()->write(json_encode($resp));
+            $res->message = $th->getMessage();
+            $resp->getBody()->write(json_encode($res));
         } 
-        return $response;
+        return $resp;
     }
 }
