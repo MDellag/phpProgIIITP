@@ -21,9 +21,9 @@ class MesaController
         $resp1 = $this->getUsoMesas('desc', $_GET['date']);
         $resp2 = $this->getUsoMesas('asc', $_GET['date']);
 
-        if(!$resp1) $resp->data1 = $resp1;
+        if($resp1) $resp->data1 = $resp1;
         else $resp->data1 = "No se econtraron Coincidencias";
-        if(!$resp2) $resp->data2 = $resp2;
+        if($resp2) $resp->data2 = $resp2;
         else $resp->data2 = "No se econtraron Coincidencias";
         
         
