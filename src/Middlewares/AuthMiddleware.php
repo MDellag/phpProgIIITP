@@ -33,14 +33,13 @@ class AuthMiddleware
         $headers = getallheaders();
         $token = $headers['token'];
 
-        
-        
         $res = new stdClass;
         $res->date = date('Y-m-d');
         $resp = new Response();
+
         try {
             echo '1';
-            $jwt = JWT::decode($token, KEY2);
+            $jwt = JWT::decode($token, KEY2, array('HS256'));
             echo 'after JWT';
             if ($jwt->type == $this->_typeuser) {
                 echo '1st IF';
