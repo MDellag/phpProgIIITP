@@ -39,8 +39,8 @@ class AuthMiddleware
         $resp->date = date('Y-m-d');
 
         try {
-            $jwt = JWT::decode($token, KEY2, array('HS256'));
-            
+            $jwt = JWT::decode($token, KEY2);
+
             if ($jwt->type == $this->_typeuser) {
 
                 $response = $handler->handle($request);
