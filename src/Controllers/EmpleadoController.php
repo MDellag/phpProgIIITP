@@ -65,8 +65,8 @@ class EmpleadoController
             $empleado->dni = $req['dni'];
             $empleado->creationDate = $date;
             $empleado->id_puesto = $req['id_puesto'];
-
-            $empleado->save();
+            echo json_encode($empleado);
+            // $empleado->save();
             $rta->data = $empleado;
         } catch (\Throwable $th) {
             $rta->status = '500 server Internal Error';
