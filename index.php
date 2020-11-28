@@ -48,11 +48,11 @@ $app->group('/empleados', function (RouteCollectorProxy $group) {
 
     $group->get('/{dni}', EmpleadoController::class . ":getOneEmployee");
 
-    $group->get('/operaciones/{idSector}[/]', EmpleadoController::class . ":operacionesBySector"); //modificar para fecha
+    $group->get('/operaciones/{idSector}[/]', EmpleadoController::class . ":operacionesBySector"); 
 
-    $group->get('/operaciones/{idSector}/empleados/{idEmpl}[/]', EmpleadoController::class . ":operacionesBySectorAndEmployee"); //modificar para fecha
+    $group->get('/operaciones/{idSector}/empleados/{idEmpl}[/]', EmpleadoController::class . ":operacionesBySectorAndEmployee"); 
 
-    $group->get('/operaciones/empleados/{idEmpl}[/]', EmpleadoController::class . ":operacionesByEmployee"); //modificar para fecha
+    $group->get('/operaciones/empleados/{idEmpl}[/]', EmpleadoController::class . ":operacionesByEmployee"); 
     
     $group->post('[/]', EmpleadoController::class . ":addEmployee");
 
@@ -64,11 +64,11 @@ $app->group('/empleados', function (RouteCollectorProxy $group) {
 
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
-    $group->get('/masvendido[/]', PedidoController::class . ":productoMasVendido"); //modificar para fecha
+    $group->get('/masvendido[/]', PedidoController::class . ":productoMasVendido"); 
 
-    $group->get('/menosvendido[/]', PedidoController::class . ":productoMenosVendido"); //modificar para fecha
+    $group->get('/menosvendido[/]', PedidoController::class . ":productoMenosVendido");
     
-    $group->get('/status/{status}[/]', PedidoController::class . ":getProductsByStatus"); //modificar para fecha
+    $group->get('/status/{status}[/]', PedidoController::class . ":getProductsByStatus"); 
 
     $group->get('/all[/]', PedidoController::class . ":getAllPedidos");
 

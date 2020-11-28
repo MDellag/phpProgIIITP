@@ -78,12 +78,14 @@ class PedidoController
         $resp = new stdClass;
 
         try {
+            if($args['status'] != "entregado" && $args['status'] != "tarde" && $args['status'] != "cancelado" )
+                throw new Exception('Status no existe');
             $pedido = Pedido::where('status', $args['status'])->get();
 
             $resp->msg = 'Productos Entregados: ' . $args['status'];
             $resp->data = $pedido;
         } catch (\Throwable $th) {
-            $resp->message = 'Status no existe';  //$th->getMessage();
+            $resp->message = $th->getMessage();
         }
 
 
