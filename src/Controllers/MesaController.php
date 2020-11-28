@@ -49,8 +49,8 @@ class MesaController
         $resp = new stdClass;
         $resp->data1 = new stdClass;
         $resp->data2 = new stdClass;
-        $resp1 = $this->mesaTotalImportes($pedido);
-        $resp2 = $this->mesaTotalImportes($pedido, 'desc');
+        $resp1 = $this->mesaTotalImportes($pedido, 'desc');
+        $resp2 = $this->mesaTotalImportes($pedido);
 
 
         $resp->date = date('Y-m-d H:m:s');
