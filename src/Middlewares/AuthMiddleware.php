@@ -22,24 +22,26 @@ class AuthMiddleware
      */
 
     private $_typeuser;
-    public function __construct($type_user)
+    private $_token;
+    public function __construct($type_user, $token)
     {
         $this->_typeuser = $type_user;
+        $this->_token = $token;
     }
 
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
 
         // $headers = getallheaders();
-        $token = $request->headers->get('token');
+        // $token = $request->headers->get('token');
 
         $res = new stdClass;
         $res->date = date('Y-m-d');
         $resp = new Response();
 
         try {
-            echo json_encode($token);
-            $jwt = JWT::decode($token, KEY2, array('HS256'));
+            echo json_encode($this->_token);
+            $jwt = JWT::decode($this->_token, KEY2, array('HS256'));
             
             if ($jwt->type == $this->_typeuser) {
                 

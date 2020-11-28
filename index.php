@@ -24,7 +24,7 @@ $app = AppFactory::create();
 
 $app->addErrorMiddleware(true, false, false);
 $app->addBodyParsingMiddleware(); //Este se encarga de parsear los Json del Body Request. Si no, no podriamos enviar Json.
-
+$token = $app->request->headers->get('token');
 
 
 $app->group('/users', function (RouteCollectorProxy $group) {
@@ -93,6 +93,6 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
     $group->get('/facturacion/total/fechas/{dateStart}/{dateEnd}[/]', MesaController::class . ":getFacturacionMesaByIdAndDate"); 
 
     
-})->add(new JsonMiddleware)->add(new AuthMiddleware("admin")); 
+})->add(new JsonMiddleware)->add(new AuthMiddleware("admin", $token)); 
 
 $app->run();
