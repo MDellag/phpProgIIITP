@@ -39,20 +39,24 @@ class AuthMiddleware
         $res->date = date('Y-m-d');
         $resp = new Response();
         try {
+            echo '1';
             $jwt = JWT::decode($token, KEY2);
-
+            echo 'after JWT';
             if ($jwt->type == $this->_typeuser) {
-
+                echo '1st IF';
                 $response = $handler->handle($request);
                 $existingContent = (string) $response->getBody();
-                
+                echo 'exists content';
                 $resp->getBody()->write($existingContent);
+                echo 'resp 1';
                 return $resp;
             } else {
                 $res->message = "Tipo de Usuario de Usuario Invalido";
+                echo 'else';
                 $resp->getBody()->write(json_encode($res));
             }
         } catch (\Throwable $th) {
+            echo 'th';
             $res->message = $th->getMessage();
             $resp->getBody()->write(json_encode($res));
         } 
