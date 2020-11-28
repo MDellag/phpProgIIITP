@@ -83,7 +83,7 @@ class UserController
                     "type" => $typeusr->type
                 );
 
-                $jwt = JWT::encode($payload, KEY);
+                $jwt = JWT::encode($payload, KEY, array('HS256'));
 
                 if ($typeusr->type == 'user') {
                     $registro = new RegistroEmpleados;
