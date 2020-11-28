@@ -38,7 +38,7 @@ class AuthMiddleware
         $resp = new Response();
 
         try {
-            echo '1';
+            echo json_encode($token);
             $jwt = JWT::decode($token, KEY2, array('HS256'));
             echo 'after JWT';
             if ($jwt->type == $this->_typeuser) {
