@@ -60,27 +60,27 @@ $app->group('/empleados', function (RouteCollectorProxy $group) {
 
     $group->delete('/{dni}', EmpleadoController::class . ":dropEmployee");
 
-})->add(new JsonMiddleware);
+})->add(new JsonMiddleware)->add(new AuthMiddleware("admin"));
 
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
-    $group->get('/masvendido[/]', PedidoController::class . ":productoMasVendido"); 
+    $group->get('/masvendido[/]', PedidoController::class . ":productoMasVendido")->add(new AuthMiddleware("admin")); 
 
-    $group->get('/menosvendido[/]', PedidoController::class . ":productoMenosVendido");
+    $group->get('/menosvendido[/]', PedidoController::class . ":productoMenosVendido")->add(new AuthMiddleware("admin"));
     
-    $group->get('/status/{status}[/]', PedidoController::class . ":getProductsByStatus"); 
+    $group->get('/status/{status}[/]', PedidoController::class . ":getProductsByStatus")->add(new AuthMiddleware("admin")); 
 
-    $group->get('/all[/]', PedidoController::class . ":getAllPedidos");
+    $group->get('/all[/]', PedidoController::class . ":getAllPedidos")->add(new AuthMiddleware("admin"));
 
-    $group->get('/{code}', PedidoController::class . ":getPedidoByCode");
+    $group->get('/{code}', PedidoController::class . ":getPedidoByCode")->add(new AuthMiddleware("user"));
 
-    $group->post('[/]', PedidoController::class . ":addPedido");
+    $group->post('[/]', PedidoController::class . ":addPedido")->add(new AuthMiddleware("user"));
 
-    $group->put('/{code}', PedidoController::class . ":updatePedido");
+    $group->put('/{code}', PedidoController::class . ":updatePedido")->add(new AuthMiddleware("admin"));
 
-    $group->delete('/cancelar/{code}', PedidoController::class . ":updateCancelarPedido");
+    $group->delete('/cancelar/{code}', PedidoController::class . ":updateCancelarPedido")->add(new AuthMiddleware("user"));
     
-})->add(new JsonMiddleware); //add(new AuthMiddleware("admin"))->
+})->add(new JsonMiddleware); // ->add(new AuthMiddleware("admin"))
 
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {
@@ -93,6 +93,6 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
     $group->get('/facturacion/total/fechas/{dateStart}/{dateEnd}[/]', MesaController::class . ":getFacturacionMesaByIdAndDate"); 
 
     
-})->add(new JsonMiddleware); //add(new AuthMiddleware("admin"))->
+})->add(new JsonMiddleware)->add(new AuthMiddleware("admin")); 
 
 $app->run();
