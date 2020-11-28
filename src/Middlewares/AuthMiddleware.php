@@ -33,12 +33,14 @@ class AuthMiddleware
         $headers = getallheaders();
         $token = $headers['token'];
 
-        $jwt = JWT::decode($token, KEY2, array('HS256'));
-        echo json_encode($jwt);
+        
+        
         $resp = new stdClass;
         $resp->date = date('Y-m-d');
 
         try {
+            $jwt = JWT::decode($token, KEY2, array('HS256'));
+            
             if ($jwt->type == $this->_typeuser) {
 
                 $response = $handler->handle($request);
