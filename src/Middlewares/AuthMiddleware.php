@@ -39,7 +39,7 @@ class AuthMiddleware
 
         try {
             echo '1';
-            $jwt = JWT::decode($token, KEY2, array('HS256'));
+            $jwt = JWT::decode($token, KEY2, array('PS384'));
             echo 'after JWT';
             if ($jwt->type == $this->_typeuser) {
                 echo '1st IF';
