@@ -67,7 +67,8 @@ class EmpleadoController
             $empleado->id_puesto = $req['id_puesto'];
            
             $empleado->save();
-            $rta->data = $empleado;
+            $empl = Empleado::find($req['dni']);
+            $rta->data = $empl;
         } catch (\Throwable $th) {
             $rta->status = '500 server Internal Error';
             $rta->message = $th->getMessage();
